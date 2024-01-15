@@ -1,0 +1,151 @@
+
+//+------------------------------------------------------------------+
+//|                                                     Prop Firm Edge |
+//|                                            Developed by Forex Robot Easy Team |
+//|                                                     forexroboteasy.com |
+//+------------------------------------------------------------------+
+
+#property strict
+
+//+------------------------------------------------------------------+
+//|                                              Global Variables |
+//+------------------------------------------------------------------+
+input int RSI_Period = 14; // RSI Period
+input int RSI_Overbought = 70; // RSI Overbought Level
+input int RSI_Oversold = 30; // RSI Oversold Level
+
+//+------------------------------------------------------------------+
+//|                                              Expert Advisor Initialization |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+    // Set WorkMode settings to mode_Real
+    if(!SetWorkMode(WORK_MODE_REAL))
+    {
+        Print('Error: Unable to set WorkMode to mode_Real');
+        return INIT_FAILED;
+    }
+    
+    // Allow the Expert Advisor to connect to news websites for sourcing news
+    if(!AllowWebRequest(true))
+    {
+        Print('Error: Unable to allow web requests');
+        return INIT_FAILED;
+    }
+    
+    // Specify the websites from which the EA should source news
+    if(!WebRequest('https://www.newswebsite1.com', 'GET', '', '', ''))
+    {
+        Print('Error: Unable to source news from https://www.newswebsite1.com');
+        return INIT_FAILED;
+    }
+    
+    if(!WebRequest('https://www.newswebsite2.com', 'GET', '', '', ''))
+    {
+        Print('Error: Unable to source news from https://www.newswebsite2.com');
+        return INIT_FAILED;
+    }
+    
+    return INIT_SUCCEEDED;
+}
+
+//+------------------------------------------------------------------+
+//|                                              Expert Advisor Start |
+//+------------------------------------------------------------------+
+void OnTick()
+{
+    // Check for high volatility after news releases
+    if(IsHighVolatility())
+    {
+        // Calculate RSI indicator for position entry
+        double rsiValue = CalculateRSI();
+        
+        // Check for optimal entry and exit points based on strategy
+        if(rsiValue < RSI_Oversold)
+        {
+            // Open Buy position
+            OpenBuyPosition();
+        }
+        else if(rsiValue > RSI_Overbought)
+        {
+            // Open Sell position
+            OpenSellPosition();
+        }
+    }
+    
+    // Manage position sizes and risk management
+    ManagePositions();
+    
+    // Monitor and update positions based on market conditions and strategy parameters
+    MonitorPositions();
+    
+    // Generate trade reports and performance analysis
+    GenerateReports();
+}
+
+//+------------------------------------------------------------------+
+//|                                              Function to Identify High Volatility |
+//+------------------------------------------------------------------+
+bool IsHighVolatility()
+{
+    // Implement logic to identify high volatility after news releases
+    // ...
+    
+    return true; // Placeholder return value for demonstration purposes
+}
+
+//+------------------------------------------------------------------+
+//|                                              Function to Calculate RSI Indicator |
+//+------------------------------------------------------------------+
+double CalculateRSI()
+{
+    // Implement logic to calculate RSI indicator
+    // ...
+    
+    return 50.0; // Placeholder return value for demonstration purposes
+}
+
+//+------------------------------------------------------------------+
+//|                                              Function to Open Buy Position |
+//+------------------------------------------------------------------+
+void OpenBuyPosition()
+{
+    // Implement logic to open Buy position
+    // ...
+}
+
+//+------------------------------------------------------------------+
+//|                                              Function to Open Sell Position |
+//+------------------------------------------------------------------+
+void OpenSellPosition()
+{
+    // Implement logic to open Sell position
+    // ...
+}
+
+//+------------------------------------------------------------------+
+//|                                              Function to Manage Positions |
+//+------------------------------------------------------------------+
+void ManagePositions()
+{
+    // Implement logic to manage position sizes and risk management
+    // ...
+}
+
+//+------------------------------------------------------------------+
+//|                                              Function to Monitor Positions |
+//+------------------------------------------------------------------+
+void MonitorPositions()
+{
+    // Implement logic to monitor and update positions based on market conditions and strategy parameters
+    // ...
+}
+
+//+------------------------------------------------------------------+
+//|                                              Function to Generate Reports |
+//+------------------------------------------------------------------+
+void GenerateReports()
+{
+    // Implement logic to generate trade reports and performance analysis
+    // ...
+}
